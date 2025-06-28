@@ -3,7 +3,10 @@ package com.santosh.cruddemo.dao;
 import com.santosh.cruddemo.entity.Student;
 import jakarta.persistence.EntityManager;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
+@Repository
 public class StudentDAOImpl implements StudentDAO{
 
 
@@ -18,7 +21,8 @@ public class StudentDAOImpl implements StudentDAO{
 
     // Implement save method
     @Override
+    @Transactional //from spring framework
     public void save(Student theStudent) {
-
+        entityManager.persist(theStudent);
     }
 }
