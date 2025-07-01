@@ -27,8 +27,52 @@ public class CruddemoApplication {
 		 *  Execute after the Spring Beans have been loaded
 		 */
 		return runner ->{
-			createStudent(studentDAO);
+			//createStudent(studentDAO);
+
+			//createMultipleStudents(studentDAO);
+
+			readStudent(studentDAO);
 		};
+	}
+
+	private void readStudent(StudentDAO studentDAO) {
+
+		// create a student
+		System.out.println("Creating new Student Object ... ");
+		Student tempStudent = new Student("Roshan","Kumar" ,"roshan@gmail.com");
+
+		// save the id of the saved student
+		System.out.println("Saving the Student");
+		studentDAO.save(tempStudent);
+
+		// display id of the saved student
+		int theId = tempStudent.getId();
+		System.out.println("Saved student. generated id: " + theId);
+
+		// retrieve student based on the id: primary key
+		System.out.println("Retrieving student with id: " + theId);
+		Student myStudent = studentDAO.findById(theId);
+
+		// display student
+		System.out.println("Found the student: " + myStudent);
+
+	}
+
+	private void createMultipleStudents(StudentDAO studentDAO) {
+
+		// Create multiple Students
+		System.out.println("Creating 3 new student objects ...");
+		Student tempStudent1 = new Student("Chandan" , "Singh", "chandan@santosh.com");
+		Student tempStudent2 = new Student("Rohit" , "Chauhan", "rohit@santosh.com");
+		Student tempStudent3 = new Student("Prakash" , "Badal", "prakash@santosh.com");
+
+		// Save the student Objects
+		System.out.println("Saving all 3 students ... ");
+		studentDAO.save(tempStudent1);
+		studentDAO.save(tempStudent2);
+		studentDAO.save(tempStudent3);
+
+
 	}
 
 	private void createStudent(StudentDAO studentDAO) {
